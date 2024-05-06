@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "fastapi>=0.111.0",
     "SQLAlchemy>=2.0.30",
+    "fasthx>=0.2403.1",
 ]
 requires-python = ">=3.10"
 readme = "README.md"

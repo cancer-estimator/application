@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:45c779ed38d6cd435b29560c78b04abc2fde2c14dabc1673450e1cd5d21e0fa3"
+content_hash = "sha256:8bcd35e4e58a1b24c7a33c0081009525ce2973eb9397f7b09bdc1c36f919eb75"
 
 [[package]]
 name = "annotated-types"
@@ -148,6 +148,21 @@ dependencies = [
 files = [
     {file = "fastapi_cli-0.0.2-py3-none-any.whl", hash = "sha256:d7a8ec89fd52ad16c52de9fe7299e4b22c7a32e1bf28aa886e5517e4927423dd"},
     {file = "fastapi_cli-0.0.2.tar.gz", hash = "sha256:589565ba758432632eadcf7b950e0ec76bb283b549784d9df17f261a8a9de476"},
+]
+
+[[package]]
+name = "fasthx"
+version = "0.2403.1"
+requires_python = "<4.0,>=3.10"
+summary = "FastAPI data APIs with HTMX support."
+groups = ["default"]
+dependencies = [
+    "fastapi>=0.100.0",
+    "typing-extensions>=4.5.0",
+]
+files = [
+    {file = "fasthx-0.2403.1-py3-none-any.whl", hash = "sha256:5ae31f31f6c10c83bdd68942f90bade1f67d3eabcb2991e82a1e490f98d0736c"},
+    {file = "fasthx-0.2403.1.tar.gz", hash = "sha256:b227c92f344609f6264f6df5ec18c647fabed353dac0a50ff28b2aa7b8949642"},
 ]
 
 [[package]]
