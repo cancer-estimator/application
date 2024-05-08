@@ -22,5 +22,6 @@ COPY --from=builder /app/.venv/ /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 # set command/entrypoint, adapt to fit your needs
 COPY cancer_estimator_application /app/cancer_estimator_application
+COPY templates /app/templates
 EXPOSE 8000
 CMD ["fastapi", "run", "cancer_estimator_application/main.py"]
