@@ -22,13 +22,15 @@ def index() -> None:
 @app.get("/api/profile")
 @jinja.hx("patient-profile-data.html")
 def patient_profile() -> models.Patient:
-    return models.Patient(
+    m = models.Patient(
         name="Lorena",
         age=42,
         sex="Female",
         room="20-B",
         hospitalized=True
     )
+    # print(m.dict())
+    return m
 
 
 @app.post("/api/profile")

@@ -31,80 +31,34 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" id="extendProfile" class="btn btn-secondary">Add extra symptons for lung cancer risk estimation</button>
     <div id="extendedQuestions" style="display: none;"></div>
 
 
-    <button type="button" id="extendProfile" class="btn btn-secondary">Add extra symptons for lung cancer risk estimation</button>
 
 </form>
 
 <script>
   // Extend profile with more questions
-  document.getElementById('extendProfile').addEventListener('click', function () {
+  document.getElementById("extendProfile").addEventListener("click", function () {
       var extendedQuestions = `
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="allergy" name="allergy" {% if allergy %}checked{% endif %}>
-                <label class="form-check-label" for="allergy">Allergy</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="fatigue" name="fatigue" {% if fatigue %}checked{% endif %}>
-                <label class="form-check-label" for="fatigue">Fatigue</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="chronic_disease" name="chronic_disease" {% if chronic_disease %}checked{% endif %}>
-                <label class="form-check-label" for="chronic_disease">Chronic Disease</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="coughing" name="coughing" {% if coughing %}checked{% endif %}>
-                <label class="form-check-label" for="coughing">Coughing</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="alcohol_consuming" name="alcohol_consuming" {% if alcohol_consuming %}checked{% endif %}>
-                <label class="form-check-label" for="alcohol_consuming">Alcohol Consuming</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="swallowing_difficulty" name="swallowing_difficulty" {% if swallowing_difficulty %}checked{% endif %}>
-                <label class="form-check-label" for="swallowing_difficulty">Swallowing Difficulty</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="peer_pressure" name="peer_pressure" {% if peer_pressure %}checked{% endif %}>
-                <label class="form-check-label" for="peer_pressure">Peer Pressure</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="anxiety" name="anxiety" {% if anxiety %}checked{% endif %}>
-                <label class="form-check-label" for="anxiety">Anxiety</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="wheezing" name="wheezing" {% if wheezing %}checked{% endif %}>
-                <label class="form-check-label" for="wheezing">Wheezing</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="yellow_fingers" name="yellow_fingers" {% if yellow_fingers %}checked{% endif %}>
-                <label class="form-check-label" for="yellow_fingers">Yellow Fingers</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="smoking" name="smoking" {% if smoking %}checked{% endif %}>
-                <label class="form-check-label" for="smoking">Smoking</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="shortness_of_breath" name="shortness_of_breath" {% if shortness_of_breath %}checked{% endif %}>
-                <label class="form-check-label" for="shortness_of_breath">Shortness of Breath</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="chest_pain" name="chest_pain" {% if chest_pain %}checked{% endif %}>
-                <label class="form-check-label" for="chest_pain">Chest Pain</label>
-            </div>
+            {% for sympton in symptons %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="{{ sympton }}" name="{{ sympton }}" {% if symptons[sympton] %}checked{% endif %}>
+                    <label class="form-check-label" for="{{ sympton }}">{{ sympton.replace('_', ' ').capitalize() }}</label>
+                </div>
+            {% endfor %}
             `;
-      var extendedQuestionsDiv = document.getElementById('extendedQuestions');
+      var extendedQuestionsDiv = document.getElementById("extendedQuestions");
       if (extendedQuestionsDiv.innerHTML === "") {
             extendedQuestionsDiv.innerHTML += extendedQuestions;
       }
-      var blocked = extendedQuestionsDiv.style.display === 'none'
-      extendedQuestionsDiv.style.display = blocked ? 'block' : 'none';
-      if (extendedQuestionsDiv.style.display === 'block') {
-          document.getElementById('extendProfile').innerText = "Collapse"
+      var blocked = extendedQuestionsDiv.style.display === "none"
+      extendedQuestionsDiv.style.display = blocked ? "block" : "none";
+      if (extendedQuestionsDiv.style.display === "block") {
+          document.getElementById("extendProfile").innerText = "Collapse"
       } else {
-          document.getElementById('extendProfile').innerText = "Add extra symptons for lung cancer risk estimation"
+          document.getElementById("extendProfile").innerText = "Add extra symptons for lung cancer risk estimation"
       }
   });
 </script>
