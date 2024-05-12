@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fasthx import Jinja
 
@@ -6,6 +7,7 @@ from cancer_estimator_application import models
 from cancer_estimator_application import debug
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Create a FastAPI Jinja2Templates instance and use it to create a
 # FastHX Jinja instance that will serve as your decorator.

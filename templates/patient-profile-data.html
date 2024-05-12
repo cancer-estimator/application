@@ -40,8 +40,7 @@
 
 <script>
   // Extend profile with more questions
-  document.getElementById("extendProfile").addEventListener("click", function () {
-      var extendedQuestions = `
+  var extendedQuestions = `
             {% for sympton in symptons %}
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="{{ sympton }}" name="{{ sympton }}" {% if symptons[sympton] %}checked{% endif %}>
@@ -49,16 +48,5 @@
                 </div>
             {% endfor %}
             `;
-      var extendedQuestionsDiv = document.getElementById("extendedQuestions");
-      if (extendedQuestionsDiv.innerHTML === "") {
-            extendedQuestionsDiv.innerHTML += extendedQuestions;
-      }
-      var blocked = extendedQuestionsDiv.style.display === "none"
-      extendedQuestionsDiv.style.display = blocked ? "block" : "none";
-      if (extendedQuestionsDiv.style.display === "block") {
-          document.getElementById("extendProfile").innerText = "Collapse"
-      } else {
-          document.getElementById("extendProfile").innerText = "Add extra symptons for lung cancer risk estimation"
-      }
-  });
+  addExtendedQuestions(extendedQuestions)
 </script>
