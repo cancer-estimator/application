@@ -32,8 +32,21 @@
 
     <button type="submit" class="btn btn-primary">Save</button>
     <button type="button" id="extendProfile" class="btn btn-secondary">Add extra symptons for lung cancer risk estimation</button>
-    <div id="extendedQuestions" style="display: none;"></div>
 
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col">
+          <div id="extendedQuestions" style="display: none;"></div>
+        </div>
+        {% if cancer_risk %}
+        <div class="col">
+          <div class="blinking">
+            <h1>HIGH RISK OF LUNG CANCER!</h1>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
 
 
 </form>
