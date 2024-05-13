@@ -26,6 +26,7 @@ class Patient(Symptons):
     age: int
     room: str
     hospitalized: bool
+    cancer_risk: bool = False
     # read only
     symptons: Dict[str, bool] = dict()
 

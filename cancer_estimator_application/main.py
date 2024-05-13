@@ -39,4 +39,6 @@ def patient_profile() -> models.Patient:
 @jinja.hx("patient-profile-data.html")
 def update_profile(patient: models.Patient):
     print(patient)
+    if all(patient.symptons.values()):
+        patient.cancer_risk = True
     return patient
