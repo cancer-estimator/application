@@ -1,21 +1,21 @@
-from typing import Optional
-from pydantic import BaseModel
+from typing import Optional, Dict, Any
+from pydantic import BaseModel, validator
 
 
 class Symptons(BaseModel):
-    allergy: Optional[bool] = False
-    fatigue: Optional[bool] = False
-    chronic_disease: Optional[bool] = False
-    coughing: Optional[bool] = False
-    alcohol_consuming: Optional[bool] = False
-    swallowing_difficulty: Optional[bool] = False
-    peer_pressure: Optional[bool] = False
-    anxiety: Optional[bool] = False
-    wheezing: Optional[bool] = False
-    yellow_fingers: Optional[bool] = False
-    smoking: Optional[bool] = False
-    shortness_of_breath: Optional[bool] = False
-    chest_pain: Optional[bool] = False
+    allergy: bool = False
+    fatigue: bool = False
+    chronic_disease: bool = False
+    coughing: bool = False
+    alcohol_consuming: bool = False
+    swallowing_difficulty: bool = False
+    peer_pressure: bool = False
+    anxiety: bool = False
+    wheezing: bool = False
+    yellow_fingers: bool = False
+    smoking: bool = False
+    shortness_of_breath: bool = False
+    chest_pain: bool = False
 
 
 # FIXME(@lerax): seg 06 mai 2024 00:56:25
@@ -26,3 +26,19 @@ class Patient(Symptons):
     age: int
     room: str
     hospitalized: bool
+    cancer_risk: bool = False
+    # read only
+    symptons: Dict[str, bool] = dict()
+
+    @validator("symptons", always=True)
+    def fill_symptons(
+        cls,
+        symptons: Dict[str, bool],
+        values: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """This should fill the symptons dictionary
+        """
+        return {
+            k: values.get(k)
+            for k in Symptons.model_fields
+        }
