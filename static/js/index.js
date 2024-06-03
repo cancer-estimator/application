@@ -1,8 +1,9 @@
 // add button related to extended questions
-function buttonExtendProfile() {
+function buttonExtendProfile(fields) {
     var extendedQuestionsDiv = document.getElementById("extendedQuestions");
     if (extendedQuestionsDiv.innerHTML === "") {
         extendedQuestionsDiv.innerHTML += extendedQuestions;
+        addIndeterminateState(fields)
     }
     var blocked = extendedQuestionsDiv.style.display === "none"
     extendedQuestionsDiv.style.display = blocked ? "block" : "none";
@@ -13,11 +14,21 @@ function buttonExtendProfile() {
     }
 }
 
-function addExtendedQuestions(extendedQuestions, initialize=false) {
+function addIndeterminateState(fields) {
+    for (let field of fields) {
+        console.log(field)
+        inputInstance = document.querySelector(`input[id=${field}]`)
+        if (!inputInstance.checked) {
+            inputInstance.indeterminate = true
+        }
+    }
+}
+
+function addExtendedQuestions(extendedQuestions, fields, initialize=false) {
     let extendedQuestionsDiv = document.getElementById("extendedQuestions");
     // initialize button shown if it's true
     if (initialize === true) {
         buttonExtendProfile()
     }
-    document.getElementById("extendProfile").addEventListener("click", buttonExtendProfile);
+    document.getElementById("extendProfile").addEventListener("click", () => buttonExtendProfile(fields));
 }

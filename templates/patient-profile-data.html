@@ -61,5 +61,10 @@
                 </div>
             {% endfor %}
             `;
-  addExtendedQuestions(extendedQuestions{%if cancer_risk %}, true{% endif %})
+  var symptonsNames = [
+      {% for sympton in symptons %}
+      "{{ sympton }}",
+      {% endfor %}
+  ]
+  addExtendedQuestions(extendedQuestions, symptonsNames{%if cancer_risk %}, true{% endif %})
 </script>
