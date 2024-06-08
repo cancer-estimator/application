@@ -36,10 +36,38 @@ If you have [Docker] installed and encounter problems running the system with th
 make run
 ```
 
+How to run tests:
+
+```
+make check
+```
+
 [Python]: https://www.python.org/
 [Make]: https://www.gnu.org/software/make/manual/make.html
 [Docker]: https://www.docker.com/
 [pdm]: https://pdm-project.org/
+
+# Deployment via CI/CD
+
+The software is automatically deployed as a Docker
+container via GitHub Actions on the main branch, contingent upon the
+successful completion of automated tests. The application is
+self-hosted on an on-premises server located in Pará, Brazil, and is
+accessible through the domain https://cancer.manoel.dev, utilizing
+Cloudflare Tunnels for internet exposure.
+
+# Manual deployment
+
+If you have the proper credentials exported as environment variables:
+
+- `CF_ACCESS_CLIENT_ID`
+- `CF_ACCESS_CLIENT_SECRET`
+
+You can deploy the application with:
+
+```
+make deploy
+```
 
 # Design
 
