@@ -24,3 +24,18 @@ distribution = true
 
 [tool.mypy]
 ignore_missing_imports = true
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "flake8>=5.0.4",
+    "mypy>=1.10.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.8.2",
+    "pytest>=8.2.2",
+]
+
+[tool.pdm.scripts]
+lint = {composite = ["flake8", "mypy"]}
+test = "pytest -vv -p no:cacheprovider --cov=cancer_estimator_application --cov-report term -k"
+tests = {composite = ["test test"]}
+check = {composite = ["lint cancer_estimator_application/", "test test"]}

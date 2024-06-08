@@ -9,13 +9,20 @@ ENV PDM_CHECK_UPDATE=false
 # copy files
 COPY pyproject.toml pdm.lock README.md /app/
 COPY cancer_estimator_application/ /app/cancer_estimator_application
-
 # install dependencies and app into the local packages directory
 WORKDIR /app
 RUN --mount=type=cache,target=/root/.cache pdm install --check --prod --no-editable
 
-### RUN stage
-FROM python:$PYTHON_BASE
+FROM builder as test
+RUN chmod 777 /app
+COPY templates /app/templates
+COPY static /app/static
+COPY tests /app/tests
+RUN --mount=type=cache,target=/root/.cache pdm install --dev
+ENTRYPOINT ["pdm"]
+
+### PROD stage
+FROM python:$PYTHON_BASE as prod
 
 # retrieve packages from build stage
 COPY --from=builder /app/.venv/ /app/.venv
