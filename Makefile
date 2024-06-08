@@ -32,6 +32,9 @@ publish: build
 
 check: build
 	$(DOCKER_RUN) $(PROJECT_NAME) check
+deploy: publish
+	bash deploy.sh
+
 	sed -i "s|/app|$(PWD)|g" tests/coverage.xml
 
 coverage:
