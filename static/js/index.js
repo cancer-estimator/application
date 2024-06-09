@@ -16,7 +16,7 @@ function buttonExtendProfile(fields) {
 
 function addIndeterminateState(fields) {
     for (let field of fields) {
-        console.log(field)
+        // console.log(field)
         inputInstance = document.querySelector(`input[id=${field}]`)
         if (!inputInstance.checked) {
             inputInstance.indeterminate = true
@@ -28,7 +28,7 @@ function addExtendedQuestions(extendedQuestions, fields, initialize=false) {
     let extendedQuestionsDiv = document.getElementById("extendedQuestions");
     // initialize button shown if it's true
     if (initialize === true) {
-        buttonExtendProfile()
+        buttonExtendProfile(fields)
     }
     document.getElementById("extendProfile").addEventListener("click", () => buttonExtendProfile(fields));
 }
