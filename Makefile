@@ -26,13 +26,18 @@ run-local:
 build:
 	docker build -t $(PROJECT_NAME) .
 
+build-test:
+	docker build -t $(PROJECT_NAME):test --target test .
+
 publish: build
 	docker tag $(PROJECT_NAME) $(DOCKER_REGISTRY):$(VERSION)
 	docker push $(DOCKER_REGISTRY):$(VERSION)
 
-check: build
-	$(DOCKER_RUN) $(PROJECT_NAME) check
-	sed -i "s|/app|$(PWD)|g" tests/coverage.xml
+deploy: publish
+	bash deploy.sh
+
+check: build-test
+	$(DOCKER_RUN) $(PROJECT_NAME):test check
 
 coverage:
 	coverage html
