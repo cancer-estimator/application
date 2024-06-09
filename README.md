@@ -1,6 +1,11 @@
+![test](https://github.com/cancer-estimator/application/actions/workflows/test.yml/badge.svg?branch=main)
+![deploy](https://github.com/cancer-estimator/application/actions/workflows/deploy.yml/badge.svg?branch=main)
+
 # Cancer Estimator Application
 
-This application implements the following document designs of an Electronic Health Record System to help estimate the risk of patients having lung cancer.
+This application implements the following document designs of an
+Electronic Health Record System to help estimate the risk of patients
+having lung cancer.
 
 # Technologies
 
@@ -30,7 +35,8 @@ Use this command to run:
 make run-local
 ```
 
-If you have [Docker] installed and encounter problems running the system with the above commands, you can use this:
+If you have [Docker] installed and encounter problems running the
+system with the above commands, you can use this:
 
 ```shell
 make run
@@ -47,27 +53,32 @@ make check
 [Docker]: https://www.docker.com/
 [pdm]: https://pdm-project.org/
 
-# Deployment via CI/CD
+# Deployment
 
-The software is automatically deployed as a Docker
-container via GitHub Actions on the main branch, contingent upon the
-successful completion of automated tests. The application is
-self-hosted on an on-premises server located in Pará, Brazil, and is
-accessible through the domain https://cancer.manoel.dev, utilizing
-Cloudflare Tunnels for internet exposure.
+## CI/CD
 
-# Manual deployment
+The software is automatically deployed as a Docker container via
+GitHub Actions on the main branch, contingent upon the successful
+completion of automated tests. The application is self-hosted on an
+on-premises server located in Pará, Brazil, and is accessible through
+the domain https://cancer.manoel.dev, utilizing Cloudflare Tunnels for
+internet exposure.
 
-If you have the proper credentials exported as environment variables:
+## Manual deployment
+
+If you have the proper cloudflare credentials exported as environment variables:
 
 - `CF_ACCESS_CLIENT_ID`
 - `CF_ACCESS_CLIENT_SECRET`
 
-You can deploy the application with:
+And you have write access to the docker hub repository
+[ryukinix/cancer-estimator-application] you can deploy the application with:
 
 ```
 make deploy
 ```
+
+[ryukinix/cancer-estimator-application]: https://hub.docker.com/r/ryukinix/cancer-estimator-application
 
 # Design
 
