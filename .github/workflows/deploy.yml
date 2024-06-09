@@ -1,15 +1,8 @@
 name: deploy
 
 on:
-  # dependent workflow
-  workflow_run:
-    workflows: ["test"]
-    branches: [main, add-ci-cd]
-    types:
-      - completed
   push:
     branches:
-      - add-ci-cd
       - main
 
 jobs:
