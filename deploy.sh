@@ -16,7 +16,7 @@ check-auth () {
 }
 
 deploy-by-webhook () {
-    curl -L -X POST \
+    curl -f -L -X POST \
          -H "CF-Access-Client-Id: ${CF_ACCESS_CLIENT_ID}" \
          -H "CF-Access-Client-Secret: ${CF_ACCESS_CLIENT_SECRET}" \
          ${WEBHOOK}
