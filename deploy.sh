@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -e
 
 WEBHOOK=https://docker.manoel.dev/api/webhooks/64005ef6-09c0-43c8-ab41-ab61d1695bd3
 
