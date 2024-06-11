@@ -34,7 +34,7 @@ publish: build
 	docker push $(DOCKER_REGISTRY):$(VERSION)
 
 deploy: publish
-	bash deploy.sh
+	bash scripts/deploy.sh
 
 check: build-test
 	$(DOCKER_RUN) $(PROJECT_NAME):test check
