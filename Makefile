@@ -39,8 +39,4 @@ deploy: publish
 check: build-test
 	$(DOCKER_RUN) $(PROJECT_NAME):test check
 
-coverage:
-	coverage html
-	open htmlcov/index.html
-
-.PHONY: build run run-local check coverage install
+.PHONY: build build-test run run-local check install
