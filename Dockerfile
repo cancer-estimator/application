@@ -18,6 +18,7 @@ RUN chmod 777 /app
 COPY templates /app/templates
 COPY static /app/static
 COPY tests /app/tests
+COPY models /app/models
 RUN --mount=type=cache,target=/root/.cache pdm install --dev
 ENTRYPOINT ["pdm"]
 
@@ -33,6 +34,7 @@ COPY cancer_estimator_application /app/cancer_estimator_application
 COPY templates /app/templates
 COPY static /app/static
 COPY scripts /app/scripts
+COPY models /app/models
 RUN bash /app/scripts/bump_static.sh
 EXPOSE 8000
 CMD ["fastapi", "run", "cancer_estimator_application/main.py"]
