@@ -18,7 +18,6 @@ RUN chmod 777 /app
 COPY templates /app/templates
 COPY static /app/static
 COPY tests /app/tests
-COPY models /app/models
 RUN --mount=type=cache,target=/root/.cache pdm install --dev
 ENTRYPOINT ["pdm"]
 
