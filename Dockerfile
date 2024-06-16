@@ -41,4 +41,4 @@ COPY scripts /app/scripts
 COPY models /app/models
 RUN bash /app/scripts/bump_static.sh
 EXPOSE 8000
-CMD ["fastapi", "run", "cancer_estimator_application/main.py"]
+CMD ["fastapi", "run", "/app/cancer_estimator_application/main.py"]
