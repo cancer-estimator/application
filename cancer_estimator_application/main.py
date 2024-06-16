@@ -5,6 +5,7 @@ from fasthx import Jinja
 
 from cancer_estimator_application import models
 from cancer_estimator_application import debug
+from cancer_estimator_application import predict
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -39,6 +40,8 @@ def patient_profile() -> models.Patient:
 @jinja.hx("patient-profile-data.html")
 def update_profile(patient: models.Patient):
     print(patient)
-    if all(patient.symptons.values()):
+    cancer_risk, cancer_flag = predict.estimate_cancer(patient)
+    if cancer_flag:
         patient.cancer_risk = True
+        patient.cancer_risk_value = round(cancer_risk, ndigits=4)
     return patient
