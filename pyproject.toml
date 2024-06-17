@@ -33,6 +33,7 @@ dev = [
     "pytest-cov>=4.0.0",
     "pytest-mock>=3.8.2",
     "pytest>=8.2.2",
+    "dvc[gdrive]>=3.50.1",
 ]
 
 [tool.pdm.scripts]
