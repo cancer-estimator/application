@@ -34,7 +34,8 @@ class Patient(Symptons):
     sex: str  # Male / Female
     age: int
     room: str
-    hospitalized: bool
+    hospitalized: bool = False
+    has_lung_cancer: bool = False
     cancer_risk: bool = False
     cancer_risk_value: Optional[float] = None
     # read only

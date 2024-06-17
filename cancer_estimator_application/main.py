@@ -43,5 +43,5 @@ def update_profile(patient: models.Patient):
     cancer_risk, cancer_flag = predict.estimate_cancer(patient)
     if cancer_flag:
         patient.cancer_risk = True
-        patient.cancer_risk_value = round(cancer_risk, ndigits=4)
+        patient.cancer_risk_value = cancer_risk
     return patient
