@@ -149,8 +149,7 @@ def update_patient(patient: models.Patient) -> models.Patient:
         for key, value in patient.dict().items():
             if key == "symptons":
                 continue
-            if value:
-                setattr(db_patient, key, value)
+            setattr(db_patient, key, value)
 
         db.commit()
         db.refresh(db_patient)

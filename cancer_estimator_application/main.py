@@ -61,8 +61,7 @@ def patient_profile_data(patient_id: int) -> models.Patient:
 def update_profile(patient: models.Patient, patient_id: int) -> models.Patient:
     print(patient)
     cancer_risk, cancer_flag = predict.estimate_cancer(patient)
-    if cancer_flag:
-        patient.cancer_risk = True
-        patient.cancer_risk_value = cancer_risk
+    patient.cancer_risk = cancer_flag
+    patient.cancer_risk_value = cancer_risk
     database.update_patient(patient)
     return patient
