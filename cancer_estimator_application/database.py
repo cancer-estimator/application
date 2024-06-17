@@ -3,51 +3,11 @@ import os
 from contextlib import contextmanager
 
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, Float
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase  # type: ignore
 from sqlalchemy.orm import sessionmaker
 
 from cancer_estimator_application import models
 
-
-def get_patients() -> List[models.Patient]:
-    with get_db() as db:
-        # Query the database
-        patients = db.query(Patient).all()
-        return [
-            models.Patient.model_validate(p)
-            for p in patients
-        ]
-
-
-def get_patient(patient_id: int) -> models.Patient:
-    with get_db() as db:
-        patient = db.query(Patient).filter(Patient.patient_id == patient_id).first()
-        if not patient:
-            raise ValueError("not found")
-        return models.Patient.model_validate(patient)
-
-
-def update_patient(patient: models.Patient) -> models.Patient:
-    """
-    Using a new update method seen in FastAPI https://github.com/tiangolo/fastapi/pull/2665
-    Simple, does not need each attribute to be updated individually
-    Uses python in built functionality... preferred to the pydintic related method
-    """
-    with get_db() as db:
-        # get the existing data
-        db_patient = db.query(Patient).filter(Patient.patient_id == patient.patient_id).one_or_none()
-        if db_patient is None:
-            raise ValueError("not found")
-
-        for key, value in patient.dict().items():
-            if key == "symptons":
-                continue
-            if value:
-                setattr(db_patient, key, value)
-
-        db.commit()
-        db.refresh(db_patient)
-        return models.Patient.model_validate(db_patient)
 
 # Database file path
 db_path = os.path.join(os.getcwd(),  "patients.db")
@@ -154,3 +114,44 @@ def create_database_if_dont_exists(recreate=False):
                 print(f"[database] patient: patient_id={p.patient_id}, name={p.name}")
     else:
         print("Database exists. Skipping table creation and data insertion.")
+
+
+def get_patients() -> List[models.Patient]:
+    with get_db() as db:
+        # Query the database
+        patients = db.query(Patient).all()
+        return [
+            models.Patient.model_validate(p)
+            for p in patients
+        ]
+
+
+def get_patient(patient_id: int) -> models.Patient:
+    with get_db() as db:
+        patient = db.query(Patient).filter(Patient.patient_id == patient_id).first()
+        if not patient:
+            raise ValueError("not found")
+        return models.Patient.model_validate(patient)
+
+
+def update_patient(patient: models.Patient) -> models.Patient:
+    """
+    Using a new update method seen in FastAPI https://github.com/tiangolo/fastapi/pull/2665
+    Simple, does not need each attribute to be updated individually
+    Uses python in built functionality... preferred to the pydintic related method
+    """
+    with get_db() as db:
+        # get the existing data
+        db_patient = db.query(Patient).filter(Patient.patient_id == patient.patient_id).one_or_none()
+        if db_patient is None:
+            raise ValueError("not found")
+
+        for key, value in patient.dict().items():
+            if key == "symptons":
+                continue
+            if value:
+                setattr(db_patient, key, value)
+
+        db.commit()
+        db.refresh(db_patient)
+        return models.Patient.model_validate(db_patient)
