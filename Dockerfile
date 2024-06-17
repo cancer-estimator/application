@@ -12,19 +12,20 @@ RUN apt-get update \
 # disable update check
 ENV PDM_CHECK_UPDATE=false
 # copy files
-COPY pyproject.toml pdm.lock setup.cfg README.md /app/
-COPY cancer_estimator_application/ /app/cancer_estimator_application
-# install dependencies and app into the local packages directory
 WORKDIR /app
-RUN --mount=type=cache,target=/root/.cache pdm install --check --prod --no-editable
+COPY pyproject.toml pdm.lock setup.cfg README.md /app/
+# install dependencies and app into the local packages directory
+RUN --mount=type=cache,target=/root/.cache pdm install --prod --no-self --check
+COPY cancer_estimator_application/ /app/cancer_estimator_application
+RUN --mount=type=cache,target=/root/.cache pdm install --no-editable
 
 FROM builder as test
 RUN chmod 777 /app
+RUN --mount=type=cache,target=/root/.cache pdm install --dev
 COPY templates /app/templates
 COPY static /app/static
 COPY tests /app/tests
 COPY models /app/models
-RUN --mount=type=cache,target=/root/.cache pdm install --dev
 ENTRYPOINT ["pdm"]
 
 ### PROD stage
