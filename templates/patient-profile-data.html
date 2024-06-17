@@ -45,8 +45,8 @@
         <div class="col">
           <div id="extendedQuestions" style="display: none;"></div>
         </div>
-        {% if cancer_risk %}
         <div class="col">
+        {% if cancer_risk %}
           <div class="blinking">
             <h1>HIGH RISK OF LUNG CANCER!</h1>
           </div>
@@ -57,8 +57,8 @@
                 <span class="value">{{ (cancer_risk_value * 100) | round(2) }}%</span>
             </div>
           </div>
-        </div>
         {% endif %}
+        </div>
       </div>
     </div>
 
@@ -68,24 +68,35 @@
 <script>
   // Extend profile with more questions
   var extendedQuestions = `
-            {% for sympton in symptons %}
-                <div class="radio-group">
-                     <div class="form-check form-check-inline">
-                         <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_yes" value="true" {% if symptons[sympton] == True %}checked{% endif %}>
-                         <label class="form-check-label" for="{{ sympton }}_yes">Yes</label>
-                     </div>
-                     <div class="form-check form-check-inline">
-                         <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_na" value="null" {% if symptons[sympton] == None %}checked{% endif %}>
-                         <label class="form-check-label" for="{{ sympton }}_na">N/A</label>
-                     </div>
-                     <div class="form-check form-check-inline">
-                         <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_no" value="false" {% if symptons[sympton] == False %}checked{% endif %}>
-                         <label class="form-check-label" for="{{ sympton }}_no">No</label>
-                     </div>
-                     <label>| {{ sympton.replace('_', ' ').title() }}</label>
-                </div>
-            {% endfor %}
-            `;
+<div class="table-responsive">
+  <table class="table table-bordered">
+     <thead>
+        <tr>
+           <th class="text-end">Question</th>
+           <th class="text-center">Yes</th>
+           <th class="text-center">N/A</th>
+           <th class="text-center">No</th>
+        </tr>
+     </thead>
+     <tbody>
+        {% for sympton in symptons %}
+        <tr>
+           <td class="text-end">{{ sympton.replace('_', ' ').title() }}</td>
+           <td class="text-center">
+              <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_yes" value="true" {% if symptons[sympton] == True %}checked{% endif %}>
+           </td>
+           <td class="text-center">
+              <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_na" value="null" {% if symptons[sympton] == None %}checked{% endif %}>
+           </td>
+           <td class="text-center">
+              <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_no" value="false" {% if symptons[sympton] == False %}checked{% endif %}>
+           </td>
+        </tr>
+        {% endfor %}
+     </tbody>
+  </table>
+</div>
+`;
   var symptonsNames = [
       {% for sympton in symptons %}
       "{{ sympton }}",
