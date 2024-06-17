@@ -20,5 +20,13 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
 
+      - uses: iterative/setup-dvc@v1
+      - name: Pull data with DVC
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
+        run: |
+          dvc remote modify origin gdrive_use_service_account true
+          dvc pull
+
       - name: Run Tests
         run: make check
