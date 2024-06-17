@@ -1,0 +1,17 @@
+{% for patient in items %}
+<tr class="clickable-row" data-id="{{ patient.patient_id }}">
+    <td>{{ patient.name }}</td>
+    <td>{{ patient.room }}</td>
+    <td>{{ patient.cancer_risk }}</td>
+</tr>
+{% endfor %}
+
+<script>
+  var rows = document.querySelectorAll('.clickable-row');
+  rows.forEach(function (row) {
+      row.addEventListener('click', function () {
+          var id = this.getAttribute('data-id');
+          window.location.href = '/profile/' + id;
+      });
+  });
+</script>

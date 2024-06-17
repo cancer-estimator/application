@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -6,6 +8,7 @@ from fasthx import Jinja
 from cancer_estimator_application import models
 from cancer_estimator_application import debug
 from cancer_estimator_application import predict
+from cancer_estimator_application import database
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -17,28 +20,40 @@ debug.register_exception(app)
 
 
 @app.get("/")
-@jinja.page("patient-profile.html")
+@jinja.page("search.html")
 def index() -> None:
     ...
 
 
-@app.get("/api/profile")
-@jinja.hx("patient-profile-data.html")
-def patient_profile() -> models.Patient:
-    m = models.Patient(
-        name="Lorena",
-        age=42,
-        sex="Female",
-        room="20-B",
-        hospitalized=True
-    )
-    # print(m.dict())
-    return m
+@app.get("/profile/{patient_id}")
+@jinja.page("patient-profile.html")
+def patient_profile_page(patient_id: int):
+    return {
+        "patient_id": 1
+    }
 
 
-@app.post("/api/profile")
+@app.get("/api/search")
+@jinja.hx("search-data.html")
+def filter_search(search: str = "") -> List[models.Patient]:
+    query = search.lower()
+    matches = [
+        patient
+        for patient in database.get_patients()
+        if query in patient.name.lower()
+    ]
+    return matches
+
+
+@app.get("/api/profile/{patient_id}")
 @jinja.hx("patient-profile-data.html")
-def update_profile(patient: models.Patient):
+def patient_profile_data(patient_id: int) -> models.Patient:
+    return database.get_patients()[patient_id]
+
+
+@app.put("/api/profile/{patient_id}")
+@jinja.hx("patient-profile-data.html")
+def update_profile(patient: models.Patient, patient_id: int) -> models.Patient:
     print(patient)
     cancer_risk, cancer_flag = predict.estimate_cancer(patient)
     if cancer_flag:
