@@ -6,9 +6,10 @@ authors = [
     {name = "Manoel Vilela", email = "manoelmvmn@ita.br"},
 ]
 dependencies = [
-    "fastapi>=0.111.0",
-    "SQLAlchemy>=2.0.30",
-    "fasthx>=0.2403.1",
+    "fastapi==0.111.0",
+    "SQLAlchemy==2.0.30",
+    "fasthx==0.2403.1",
+    "numpy==1.26.4",
     "cancer-estimator-model @ git+https://github.com/cancer-estimator/model.git@0.1.0-dev2",
 ]
 requires-python = "<3.12,>=3.10"
