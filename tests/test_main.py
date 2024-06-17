@@ -8,6 +8,7 @@ from cancer_estimator_application import main
 def client():
     return TestClient(main.app)
 
+
 @pytest.fixture
 def default_response():
     return {
@@ -19,6 +20,7 @@ def default_response():
         "allergy": False,
         "anxiety": False,
         "cancer_risk": False,
+        "has_lung_cancer": False,
         "chest_pain": False,
         "coughing": False,
         "fatigue": False,
