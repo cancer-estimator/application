@@ -69,9 +69,20 @@
   // Extend profile with more questions
   var extendedQuestions = `
             {% for sympton in symptons %}
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="{{ sympton }}" name="{{ sympton }}" {% if symptons[sympton] %}checked{% endif %}>
-                    <label class="form-check-label" for="{{ sympton }}">{{ sympton.replace('_', ' ').capitalize() }}</label>
+                <div class="radio-group">
+                     <div class="form-check form-check-inline">
+                         <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_yes" value="true" {% if symptons[sympton] == True %}checked{% endif %}>
+                         <label class="form-check-label" for="{{ sympton }}_yes">Yes</label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                         <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_na" value="null" {% if symptons[sympton] == None %}checked{% endif %}>
+                         <label class="form-check-label" for="{{ sympton }}_na">N/A</label>
+                     </div>
+                     <div class="form-check form-check-inline">
+                         <input class="form-check-input" type="radio" name="{{ sympton }}" id="{{ sympton }}_no" value="false" {% if symptons[sympton] == False %}checked{% endif %}>
+                         <label class="form-check-label" for="{{ sympton }}_no">No</label>
+                     </div>
+                     <label>| {{ sympton.replace('_', ' ').title() }}</label>
                 </div>
             {% endfor %}
             `;
