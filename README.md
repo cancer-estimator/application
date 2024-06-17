@@ -5,8 +5,9 @@
 
 This application implements the following document designs of an
 Electronic Health Record System to help estimate the risk of patients
-having lung cancer.
+having lung cancer. [Presentation]
 
+[Presentation]: https://docs.google.com/presentation/d/e/2PACX-1vT9qdlz5h49znwlLyCpQco9YnZ6oemkGKMMz6vmC8yDJU_jz5ahVmtpEuk47WxGew/pub?start=false&loop=false&delayms=60000#slide=id.p1
 # Technologies
 
 - [FastAPI] is a library used to create the HTTP server.
