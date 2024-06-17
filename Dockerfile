@@ -12,7 +12,7 @@ RUN apt-get update \
 # disable update check
 ENV PDM_CHECK_UPDATE=false
 # copy files
-COPY pyproject.toml pdm.lock README.md /app/
+COPY pyproject.toml pdm.lock setup.cfg README.md /app/
 COPY cancer_estimator_application/ /app/cancer_estimator_application
 # install dependencies and app into the local packages directory
 WORKDIR /app
