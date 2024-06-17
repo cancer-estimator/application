@@ -2,17 +2,19 @@ import pytest
 from fastapi.testclient import TestClient
 
 from cancer_estimator_application import main
+from cancer_estimator_application import database
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def client():
+    database.create_database_if_dont_exists(recreate=True)
     return TestClient(main.app)
 
 
 @pytest.fixture
 def default_response():
     return {
-        "patient_id": 0,
+        "patient_id": 1,
         "age": 42,
         "room": "20-B",
         "name": "Lorena",
@@ -71,7 +73,7 @@ def default_response():
 
 
 def test_main_get_api_profile(client, default_response):
-    response = client.get("/api/profile/0")
+    response = client.get("/api/profile/1")
     assert response.status_code == 200
     assert response.json() == default_response
 
@@ -80,6 +82,6 @@ def test_main_post_api_profile(client, default_response):
     for sympton in default_response["symptons"]:
         default_response[sympton] = True
     del default_response["symptons"]
-    response = client.put("/api/profile/0", json=default_response)
+    response = client.put("/api/profile/1", json=default_response)
     assert response.status_code == 200
     assert response.json()["cancer_risk"] is True
