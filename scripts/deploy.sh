@@ -2,7 +2,7 @@
 
 set -e
 
-WEBHOOK=https://docker.manoel.dev/api/webhooks/64005ef6-09c0-43c8-ab41-ab61d1695bd3
+WEBHOOK=https://docker.manoel.dev/api/webhooks/639c74db-f5ea-4d7d-b4ea-5e27f2e5cd71
 
 err () {
     >&2 echo $@
