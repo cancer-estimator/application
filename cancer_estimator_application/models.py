@@ -1,30 +1,37 @@
 from typing import Dict, Any, Optional
-from pydantic import BaseModel, validator
+from typing_extensions import Annotated
+
+from pydantic import BaseModel, validator,  BeforeValidator
+
+OptionalBool = Annotated[
+    Optional[bool],
+    BeforeValidator(lambda v: None if v == "null" else v)
+]
 
 
 class Symptons(BaseModel):
-    smoking: bool = False
-    coughing: bool = False
-    alcohol_use: bool = False
-    swallowing_difficulty: bool = False
-    snoring: bool = False
-    anxiety: bool = False
-    fatigue: bool = False
-    wheezing: bool = False
-    yellow_fingers: bool = False
-    shortness_of_breath: bool = False
-    allergy: bool = False
-    chest_pain: bool = False
-    chronic_lung_disease: bool = False
-    coughing_of_blood: bool = False
-    frequent_cold: bool = False
-    genetic_risk: bool = False
-    obesity: bool = False
-    occupational_hazards: bool = False
-    passive_smoker: bool = False
-    peer_pressure: bool = False
-    dust_allergy: bool = False
-    dry_cough: bool = False
+    smoking: OptionalBool = None
+    coughing: OptionalBool = None
+    alcohol_use: OptionalBool = None
+    swallowing_difficulty: OptionalBool = None
+    snoring: OptionalBool = None
+    anxiety: OptionalBool = None
+    fatigue: OptionalBool = None
+    wheezing: OptionalBool = None
+    yellow_fingers: OptionalBool = None
+    shortness_of_breath: OptionalBool = None
+    allergy: OptionalBool = None
+    chest_pain: OptionalBool = None
+    chronic_lung_disease: OptionalBool = None
+    coughing_of_blood: OptionalBool = None
+    frequent_cold: OptionalBool = None
+    genetic_risk: OptionalBool = None
+    obesity: OptionalBool = None
+    occupational_hazards: OptionalBool = None
+    passive_smoker: OptionalBool = None
+    peer_pressure: OptionalBool = None
+    dust_allergy: OptionalBool = None
+    dry_cough: OptionalBool = None
 
 
 # FIXME(@lerax): seg 06 mai 2024 00:56:25
@@ -50,6 +57,7 @@ class Patient(Symptons):
         """This should fill the symptons dictionary
         """
         return {
+            # Coercion: null -> false
             k: values.get(k)
             for k in Symptons.model_fields
         }

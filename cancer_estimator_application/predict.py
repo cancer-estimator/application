@@ -12,6 +12,8 @@ def get_model():
 
 
 def _proper_type_coercion(feature, value):
+    if value is None:
+        value = False
     if feature.upper() in models.cat_features + models.artificial_variables:
         return int(value)
     return float(value)
