@@ -4,6 +4,11 @@ FROM python:$PYTHON_BASE AS builder
 
 # install PDM
 RUN pip install -U pdm
+RUN apt-get update \
+     && apt-get install -y --no-install-recommends git \
+     && apt-get purge -y --auto-remove \
+     && rm -rf /var/lib/apt/lists/*
+
 # disable update check
 ENV PDM_CHECK_UPDATE=false
 # copy files
@@ -33,6 +38,7 @@ COPY cancer_estimator_application /app/cancer_estimator_application
 COPY templates /app/templates
 COPY static /app/static
 COPY scripts /app/scripts
+COPY models /app/models
 RUN bash /app/scripts/bump_static.sh
 EXPOSE 8000
-CMD ["fastapi", "run", "cancer_estimator_application/main.py"]
+CMD ["fastapi", "run", "/app/cancer_estimator_application/main.py"]

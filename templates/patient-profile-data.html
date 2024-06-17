@@ -43,6 +43,13 @@
           <div class="blinking">
             <h1>HIGH RISK OF LUNG CANCER!</h1>
           </div>
+          <div>
+            <div class="gauge" style="width: 400px; --rotation:{{ cancer_risk_value * 180 | round }}deg; --color:#ff4444; --background:#e9ecef;">
+                <div class="percentage"></div>
+                <div class="mask"></div>
+                <span class="value">{{ cancer_risk_value * 100 }}%</span>
+            </div>
+          </div>
         </div>
         {% endif %}
       </div>

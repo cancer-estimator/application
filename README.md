@@ -29,6 +29,12 @@ python virtual environment managed by [pdm]:
 make install
 ```
 
+You will need to sync model files (trained) from remote repository too, so:
+
+```
+pdm run dvc pull
+```
+
 Use this command to run:
 
 ```shell

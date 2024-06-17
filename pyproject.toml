@@ -9,8 +9,9 @@ dependencies = [
     "fastapi>=0.111.0",
     "SQLAlchemy>=2.0.30",
     "fasthx>=0.2403.1",
+    "cancer-estimator-model @ git+https://github.com/cancer-estimator/model.git@0.1.0-dev2",
 ]
-requires-python = ">=3.10"
+requires-python = "<3.12,>=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 
@@ -32,6 +33,7 @@ dev = [
     "pytest-cov>=4.0.0",
     "pytest-mock>=3.8.2",
     "pytest>=8.2.2",
+    "dvc[gdrive]>=3.50.1",
 ]
 
 [tool.pdm.scripts]
