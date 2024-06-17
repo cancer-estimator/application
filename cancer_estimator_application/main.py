@@ -17,14 +17,22 @@ debug.register_exception(app)
 
 
 @app.get("/")
-@jinja.page("patient-profile.html")
+@jinja.page("search.html")
 def index() -> None:
     ...
 
 
-@app.get("/api/profile")
+@app.get("/api/profile/{patient_id}/edit")
+@jinja.page("patient-profile.html")
+def patient_profile_page(patient_id: int):
+    return {
+        "patient_id": 1
+    }
+
+
+@app.get("/api/profile/{patient_id}")
 @jinja.hx("patient-profile-data.html")
-def patient_profile() -> models.Patient:
+def patient_profile_data(patient_id: int) -> models.Patient:
     m = models.Patient(
         name="Lorena",
         age=42,
@@ -32,7 +40,6 @@ def patient_profile() -> models.Patient:
         room="20-B",
         hospitalized=True
     )
-    # print(m.dict())
     return m
 
 

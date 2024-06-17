@@ -16,7 +16,7 @@
     <div class="container mt-5">
       <h1 class="mb-4">Patient Profile</h1>
 
-      <div id="profile" hx-get="/api/profile" hx-trigger="load">
+      <div id="profile" hx-get="/api/profile/{{ patient_id }}" hx-trigger="load">
         <!-- Displaying the user profile data -->
       </div>
 
