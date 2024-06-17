@@ -8,11 +8,9 @@ from cancer_estimator_application import main
 def client():
     return TestClient(main.app)
 
-
-def test_main_api_profile(client):
-    response = client.get("/api/profile")
-    assert response.status_code == 200
-    assert response.json() == {
+@pytest.fixture
+def default_response():
+    return {
         "age": 42,
         "room": "20-B",
         "name": "Lorena",
@@ -67,3 +65,18 @@ def test_main_api_profile(client):
             "yellow_fingers": False,
         },
     }
+
+
+def test_main_get_api_profile(client, default_response):
+    response = client.get("/api/profile")
+    assert response.status_code == 200
+    assert response.json() == default_response
+
+
+def test_main_post_api_profile(client, default_response):
+    for sympton in default_response["symptons"]:
+        default_response[sympton] = True
+    del default_response["symptons"]
+    response = client.post("/api/profile", json=default_response)
+    assert response.status_code == 200
+    assert response.json()["cancer_risk"] is True
