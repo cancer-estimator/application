@@ -1,7 +1,7 @@
 from typing import Dict, Any, Optional
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, validator,  BeforeValidator
+from pydantic import BaseModel,  BeforeValidator, ConfigDict, validator
 
 OptionalBool = Annotated[
     Optional[bool],
@@ -37,6 +37,7 @@ class Symptons(BaseModel):
 # FIXME(@lerax): seg 06 mai 2024 00:56:25
 # inheritance here is just hacky and non-sense, fix this
 class Patient(Symptons):
+    model_config = ConfigDict(from_attributes=True)
     patient_id: int
     name: str
     sex: str  # Male / Female

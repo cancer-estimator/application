@@ -19,6 +19,11 @@ jinja = Jinja(Jinja2Templates("templates"))
 debug.register_exception(app)
 
 
+@app.on_event("startup")
+def initialize_database():
+    database.create_database_if_dont_exists()
+
+
 @app.get("/")
 @jinja.page("search.html")
 def index() -> None:
@@ -29,7 +34,7 @@ def index() -> None:
 @jinja.page("patient-profile.html")
 def patient_profile_page(patient_id: int):
     return {
-        "patient_id": 1
+        "patient_id": patient_id
     }
 
 
@@ -48,7 +53,7 @@ def filter_search(search: str = "") -> List[models.Patient]:
 @app.get("/api/profile/{patient_id}")
 @jinja.hx("patient-profile-data.html")
 def patient_profile_data(patient_id: int) -> models.Patient:
-    return database.get_patients()[patient_id]
+    return database.get_patient(patient_id)
 
 
 @app.put("/api/profile/{patient_id}")
@@ -59,4 +64,5 @@ def update_profile(patient: models.Patient, patient_id: int) -> models.Patient:
     if cancer_flag:
         patient.cancer_risk = True
         patient.cancer_risk_value = cancer_risk
+    database.update_patient(patient)
     return patient

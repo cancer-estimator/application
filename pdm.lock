@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:ff91363176d77289541fa31d3db0f905fe31e5c7708c833f24489c65a6b71f43"
+content_hash = "sha256:04c15192c5fc1456cd1d568282ce1fd76dd009e0d237ef8dabcb705ae7faebd4"
 
 [[package]]
 name = "aiohttp"
@@ -2656,6 +2656,20 @@ files = [
     {file = "SQLAlchemy-2.0.30-cp311-cp311-win_amd64.whl", hash = "sha256:0b3f4c438e37d22b83e640f825ef0f37b95db9aa2d68203f2c9549375d0b2260"},
     {file = "SQLAlchemy-2.0.30-py3-none-any.whl", hash = "sha256:7108d569d3990c71e26a42f60474b4c02c8586c4681af5fd67e51a044fdea86a"},
     {file = "SQLAlchemy-2.0.30.tar.gz", hash = "sha256:2b1708916730f4830bc69d6f49d37f7698b5bd7530aca7f04f785f8849e95255"},
+]
+
+[[package]]
+name = "sqlalchemy-stubs"
+version = "0.4"
+summary = "SQLAlchemy stubs and mypy plugin"
+groups = ["dev"]
+dependencies = [
+    "mypy>=0.790",
+    "typing-extensions>=3.7.4",
+]
+files = [
+    {file = "sqlalchemy-stubs-0.4.tar.gz", hash = "sha256:c665d6dd4482ef642f01027fa06c3d5e91befabb219dc71fc2a09e7d7695f7ae"},
+    {file = "sqlalchemy_stubs-0.4-py3-none-any.whl", hash = "sha256:5eec7aa110adf9b957b631799a72fef396b23ff99fe296df726645d01e312aa5"},
 ]
 
 [[package]]
